@@ -19,24 +19,28 @@ function computerPlay () { //Computer randomly plays Rock, Paper, or Scissors
         
 let playerScore = 0;
 let computerScore = 0;
-let round = 1; 
+let round = 0; 
 let numRounds = 5; 
+let gameOver = false;
 
 function playRound (playerSelection) { //Adjusts score depending on result of a round
     const btns = document.querySelector('.buttons');
     const result = document.createElement('p');
+    result.className = 'roundResult';
     result.classList.add('content');
 
     let computerSelection = computerPlay();
 
-    if (round > numRounds) {
+    if (round < numRounds) {
+        result.textContent = `Round ${round+1}: You played ${playerSelection}. The computer played ${computerSelection}`; //Prints result of each round
+        btns.appendChild(result);
+        calcScore(playerSelection, computerSelection);
+        console.log(round);
+        
+    } else if (round === numRounds) {
         getResult(playerScore, computerScore);
-        return;
-    }
-
-    result.textContent = `Round ${round}: You played ${playerSelection}. The computer played ${computerSelection}`; //Prints result of each round
-    btns.appendChild(result);
-    calcScore(playerSelection, computerSelection);
+        console.log(round);
+    } 
     round++;
 }
 
@@ -77,16 +81,23 @@ function getResult(playerScore, computerScore) {
     const btns = document.querySelector('.buttons');
     const finalResult = document.createElement('p');
     finalResult.classList.add('content');
+    finalResult.className = 'finalResult';
+
+    const replay = document.createElement('button');
+    replay.className = 'replay';
     
     if (playerScore < computerScore) {
-        
-        finalResult.textContent = `GAME OVER! YOU LOSE :( The final score is ${playerScore}:${computerScore}`;   
+        finalResult.textContent = `GAME OVER! YOU LOSE :( The final score is ${playerScore}:${computerScore}`;
     } else if (playerScore > computerScore) {
         finalResult.textContent = `GAME OVER! YOU WIN :) The final score is ${playerScore}:${computerScore}`;
     } else {     
         finalResult.textContent = `GAME OVER! YOU TIED :| The final score is ${playerScore}:${computerScore}`;
     }
     btns.appendChild(finalResult);
+    
+    replay.textContent = 'Click to Replay';
+    replay.addEventListener('click', () => {window.location.reload()});
+    btns.appendChild(replay);
 }
 
 
@@ -98,3 +109,6 @@ paper.addEventListener('click', () => {playRound('paper')});
 
 const scissors = document.querySelector('#scissors');
 scissors.addEventListener('click', () => {playRound('scissors')});
+
+
+//    <button onClick="window.location.reload();">Refresh Page</button>
