@@ -22,84 +22,79 @@ let computerScore = 0;
 let round = 0; 
 let numRounds = 5; 
 let gameOver = false;
+let roundResult;
 
 function playRound (playerSelection) { //Adjusts score depending on result of a round
-    const btns = document.querySelector('.buttons');
-    const result = document.createElement('p');
-    result.className = 'roundResult';
-    result.classList.add('content');
-
     let computerSelection = computerPlay();
 
     if (round < numRounds) {
-        result.textContent = `Round ${round+1}: You played ${playerSelection}. The computer played ${computerSelection}`; //Prints result of each round
-        btns.appendChild(result);
-        calcScore(playerSelection, computerSelection);
-        console.log(round);
-        
-    } else if (round === numRounds) {
+        document.getElementById('round').innerHTML = `Round ${round+1}`;
+        getRoundResult(playerSelection, computerSelection);
+        if (roundResult === 'tie') {
+            document.getElementById('round-msg').innerHTML = `You played ${playerSelection} and the computer played ${computerSelection}. TIE ROUND!`;
+        } else if (roundResult === 'player-win') {
+            playerScore += 1;
+            document.getElementById('round-msg').innerHTML = `You played ${playerSelection} and the computer played ${computerSelection}. YOU WIN THE ROUND!`;
+            document.getElementById('player-score').innerHTML = `${playerScore}`;
+        } else {
+            computerScore += 1;
+            document.getElementById('round-msg').innerHTML = `You played ${playerSelection} and the computer played ${computerSelection}. YOU LOSE THE ROUND!`;
+            document.getElementById('computer-score').innerHTML = `${computerScore}`;
+        }
+    } 
+    if (round === numRounds-1) {
+        gameOver = true;
         getResult(playerScore, computerScore);
-        console.log(round);
     } 
     round++;
 }
 
-function calcScore (playerSelection, computerSelection) {
+function getRoundResult (playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
-        return; //Tie, score doesn't change
+        return roundResult = 'tie';
     } else if (playerSelection == 'rock' && computerSelection == 'paper' ||
             playerSelection == 'paper' && computerSelection == 'scissors' ||
             playerSelection == 'scissors' && computerSelection == 'rock') {
-        return playerScore += 1; //Player wins, increase player score by 1
+        return roundResult = 'player-win';
     } else {
-        return computerScore += 1; //Computer wins, increase computer score by 1
+        return roundResult = 'computer-win';
     }
 }
 
-/*function playGame (playerSelection) {
-    
-
-
-    //Loops through multiple rounds
-    for (round = 1; round <= numRounds; round++) { 
-        let computerSelection = computerPlay ();
-        playRound(playerSelection, computerSelection);
-        
-        const btns = document.querySelector('.buttons');
-        const result = document.createElement('p');
-        result.classList.add('content');
-        result.textContent = `Round ${round}: You played ${playerSelection}. The computer played ${computerSelection}`; //Prints result of each round
-        btns.appendChild(result);
-
-        if (round === numRounds) {
-            getResult(playerScore, computerScore);
-        }
-    }
-}*/
-
-function getResult(playerScore, computerScore) {
-    const btns = document.querySelector('.buttons');
-    const finalResult = document.createElement('p');
-    finalResult.classList.add('content');
+function getResult (playerScore, computerScore) {
+    const images = document.querySelector('.score');
+    const finalResult = document.createElement('h2');
     finalResult.className = 'finalResult';
 
+    if (playerScore < computerScore) {
+        finalResult.innerHTML = `☹️ GAME OVER. YOU LOSE! ☹️`;
+    } else if (playerScore > computerScore) {
+        finalResult.innerHTML = '😁 GAME OVER. YOU WIN! 😁';
+    } else {     
+        finalResult.innerHTML = '😐 GAME OVER YOU TIED! 😐';
+    }
+    images.after(finalResult);
     const replay = document.createElement('button');
     replay.className = 'replay';
-    
-    if (playerScore < computerScore) {
-        finalResult.textContent = `GAME OVER! YOU LOSE :( The final score is ${playerScore}:${computerScore}`;
-    } else if (playerScore > computerScore) {
-        finalResult.textContent = `GAME OVER! YOU WIN :) The final score is ${playerScore}:${computerScore}`;
-    } else {     
-        finalResult.textContent = `GAME OVER! YOU TIED :| The final score is ${playerScore}:${computerScore}`;
-    }
-    btns.appendChild(finalResult);
-    
-    replay.textContent = 'Click to Replay';
-    replay.addEventListener('click', () => {window.location.reload()});
-    btns.appendChild(replay);
+    replay.innerHTML = 'Replay';
+    replay.addEventListener('click', resetGame);
+    finalResult.after(replay);
 }
 
+function resetGame () {
+    document.getElementById('round').innerHTML = `Let's play again!`;
+    document.getElementById('round-msg').innerHTML = `First to 5 wins. Your move!`;
+    playerScore = 0;
+    computerScore = 0;
+    document.getElementById('player-score').innerHTML = `${playerScore}`;
+    document.getElementById('computer-score').innerHTML = `${computerScore}`;
+    round = 0; 
+    gameOver = false;
+    finalResult = document.querySelector('.finalResult');
+    finalResult.remove();
+    replay = document.querySelector('.replay');
+    replay.remove();
+}
 
 const rock = document.querySelector('#rock');
 rock.addEventListener('click', () => {playRound('rock')});
@@ -109,6 +104,3 @@ paper.addEventListener('click', () => {playRound('paper')});
 
 const scissors = document.querySelector('#scissors');
 scissors.addEventListener('click', () => {playRound('scissors')});
-
-
-//    <button onClick="window.location.reload();">Refresh Page</button>

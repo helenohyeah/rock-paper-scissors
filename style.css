@@ -1,83 +1,161 @@
-html, body {
-    background: lightblue;
+html {
     font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    background: black;
+}
+
+header {
+    height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 h1 {
     text-align: center;
-    margin: 40px 0 40px 0;
-    font-size: 32px;
+    font-size: 48px;
     font-weight: bold;
+    color: #45EAFF;
+    text-shadow: 3px 3px 0 #FF30D8, 6px 6px 0 #452CD6;
+    text-transform: uppercase;
+    
 }
 
-div.play p {
-    text-align: center;
-    font-size: 22px;
-    margin: 0;
-}
-
-div.play {
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 25px 40px 20px 40px;
-    background: whitesmoke;
-    width: 80vw;
+.content {
+    height: 79vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
-div.buttons {
+h2 {
     text-align: center;
-    margin: 40px 0 40px 0;
+    font-family: 'Bangers', cursive;
+    font-size: 36px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 3vh 0 3vh 0;
+    color: white
 }
 
-button.btn {
+#round-msg {
+    text-align: center;
+    margin: 2vh 0 4vh 0;
     border: none;
-    background-color: black;
-    color: white;
+    padding: 1em 5vw 1em 5vw;
+    background: #45EAFF;
+    color: black;
+    box-shadow: 3px 3px 0 0 #FF30D8, 6px 6px 0 0 #452CD6;
+}
+
+.titles {
     text-align: center;
-    font-size: 18px;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    width: 800px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.titles h2 {
+    font-size: 24px;
     width: 150px;
-    height: 80px;
-    margin: 0 20px 20px 20px;
+    margin: 1vh 0 1vh 0;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 800px;
+}
+
+#rock,
+#paper,
+#scissors {
+    width: 150px;
+    margin: 8px 0 8px 0;
+    transition: 0.15s;
+}
+
+#rock:hover,
+#paper:hover,
+#scissors:hover {
+    transform: scale(1.2);
+    transition: 0.15s;
     cursor: pointer;
 }
 
-div.play p.roundResult {
-    background: lightgrey;
-    margin: 8px 0 8px 0;
-    padding: .5em 0 .5em 0;
-    text-align: center;
-    font-size: 14px;
+.score {
+    display: flex;
+    margin: 2vh 0 2vh 0;
+}
+
+.score p {
+    color: white;
+    padding: .5em .75em .5em .75em;
+    border: 1px solid #FF30D8;
+}
+
+#player-score {
+    margin-right: 2vw;
+    font-weight: bold;
+    border-left: 0;
+    background: #FF30D8;
+    color: white;
+}
+
+#computer-score {
+    margin-left: 2vw;
+    font-weight: bold;
+    border-right: 0;
+    background: #FF30D8;
+    color: white;
 }
 
 .finalResult {
-    margin: 20px 0 0 0;
-    font-size: 22px;
-    font-weight: bold;
-    background: orange;
-    padding: .5em 0 .5em 0;
+    color: #45EAFF;
+    text-shadow: 3px 3px 0 #FF30D8, 6px 6px 0 #452CD6;
 }
 
 .replay {
-    border: 2px solid #1172c4;
-    border-radius: 26px;
-    background-color: white;
     text-align: center;
-    color: #1172c4;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: bolder;
     text-transform: uppercase;
-    width: 40vw;
-    height: 2em;
-    margin: 20px 0 20px 0;
+    background: #45EAFF;
+    color: #452CD6;
+    border: none;
+    border-radius: 10px;
+    padding: .5em 1em .5em 1em;
+    box-shadow: 3px 3px 0 0 #FF30D8, 6px 6px 0 0 #452CD6;
     cursor: pointer;
     transition: 0.1s;
 }
 
 .replay:hover {
-    background-color: #1172c4;
-    color: white;
+    transform: scale(1.1);
     transition: 0.1s;
+}
+
+footer {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    bottom: 0;
+    height: 8vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 14px;
+    color: white;
+    align-items: center;
+}
+
+#github {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
 }
