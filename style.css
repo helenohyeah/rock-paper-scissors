@@ -44,9 +44,9 @@ h2 {
     margin: 2vh 0 4vh 0;
     border: none;
     padding: 1em 5vw 1em 5vw;
-    background: #45EAFF;
-    color: black;
-    box-shadow: 3px 3px 0 0 #FF30D8, 6px 6px 0 0 #452CD6;
+    background: black;
+    color: white;
+    border: 1px solid white;
 }
 
 .titles {
@@ -96,23 +96,23 @@ h2 {
 .score p {
     color: white;
     padding: .5em .75em .5em .75em;
-    border: 1px solid #FF30D8;
+    border: 1px solid white
 }
 
 #player-score {
     margin-right: 2vw;
     font-weight: bold;
     border-left: 0;
-    background: #FF30D8;
-    color: white;
+    background: white;
+    color: black;
 }
 
 #computer-score {
     margin-left: 2vw;
     font-weight: bold;
     border-right: 0;
-    background: #FF30D8;
-    color: white;
+    background: white;
+    color: black;
 }
 
 .finalResult {
