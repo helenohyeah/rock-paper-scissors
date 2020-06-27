@@ -52,9 +52,9 @@ function playRound (playerSelection) { //Adjusts score depending on result of a 
 function getRoundResult (playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
         return roundResult = 'tie';
-    } else if (playerSelection == 'rock' && computerSelection == 'paper' ||
-            playerSelection == 'paper' && computerSelection == 'scissors' ||
-            playerSelection == 'scissors' && computerSelection == 'rock') {
+    } else if (playerSelection == 'rock' && computerSelection == 'scissors' ||
+            playerSelection == 'paper' && computerSelection == 'rock' ||
+            playerSelection == 'scissors' && computerSelection == 'paper') {
         return roundResult = 'player-win';
     } else {
         return roundResult = 'computer-win';
